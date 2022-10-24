@@ -25,6 +25,31 @@
         <i class="el-icon-attract"></i>
         <span slot="title">Git同步</span>
       </el-menu-item>
+      <el-menu-item @click="openLink('http://192.168.50.11:8028')">
+        <i class="el-icon-attract"></i>
+        <span slot="title">Jenkins</span>
+      </el-menu-item>
+      <el-menu-item >
+        <i class="el-icon-attract"></i>
+        <span slot="title">埋点测试工具(TODO)</span>
+      </el-menu-item>
+      <el-menu-item @click="openLink('http://qa-bi.reta-inc.com/')">
+        <i class="el-icon-attract"></i>
+        <span slot="title">QA埋点数据</span>
+      </el-menu-item>
+      <el-menu-item @click="openLink('http://bi.reta-inc.com/')">
+        <i class="el-icon-attract"></i>
+        <span slot="title">生产埋点数据</span>
+      </el-menu-item>
+      <el-menu-item @click="openLink('http://ci.reta-inc.com/')">
+        <i class="el-icon-attract"></i>
+        <span slot="title">生产服务器log</span>
+      </el-menu-item>
+      <el-menu-item @click="openLink('http://monitor.reta-inc.com')">
+        <i class="el-icon-attract"></i>
+        <span slot="title">生产服务器监控</span>
+      </el-menu-item>
+      
     </div>
   </NavLeft>
 </template>
@@ -39,6 +64,9 @@ export default {
     this.saveProjectEnv();
   },
   methods: {
+    openLink(url) {
+      window.open(url, '_blank')
+    },
     saveProjectEnv() {
       let localProjectEnvList = JSON.parse(localStorage.getItem("projectEnvList"));
       if (!localProjectEnvList) {

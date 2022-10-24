@@ -174,6 +174,27 @@ const routes = [
             },
             component: () => import("@/views/teprunner/GitSync.vue"),
           },
+          {
+            path: "gitSync",
+            meta: {
+              title: "埋点测试",
+            },
+            component: () => import("@/views/teprunner/GitSync.vue"),
+          },
+          {
+            path: "gitSync",
+            meta: {
+              title: "生产线上埋点数据",
+            },
+            component: () => import("@/views/teprunner/GitSync.vue"),
+          },
+          {
+            path: "gitSync",
+            meta: {
+              title: "生产线上监控",
+            },
+            component: () => import("@/views/teprunner/GitSync.vue"),
+          },
         ],
       },
       {

@@ -20,6 +20,7 @@ git clone git@github.com:dongfanger/teprunner-frontend.git
 
 ```
 npm install
+CXXFLAGS="--std=c++17" yarn install
 ```
 
 ## 启动服务
