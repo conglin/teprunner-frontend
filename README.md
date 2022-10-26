@@ -19,7 +19,11 @@ git clone git@github.com:dongfanger/teprunner-frontend.git
 在项目目录打开cmd，执行命令：
 
 ```
-npm install
+rm ./yarn.lock
+pyenv global 2.7.18/envs/py2
+
+rm -rf ./node_modules
+
 CXXFLAGS="--std=c++17" yarn install
 ```
 
