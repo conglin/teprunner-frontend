@@ -175,6 +175,13 @@ const routes = [
             component: () => import("@/views/teprunner/GitSync.vue"),
           },
           {
+            path: "jenkins",
+            meta: {
+              title: "jenkins自动化",
+            },
+            component: () => import("@/views/teprunner/Jenkins.vue"),
+          },
+          {
             path: "gitSync",
             meta: {
               title: "埋点测试",

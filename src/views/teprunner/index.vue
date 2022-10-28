@@ -25,11 +25,11 @@
         <i class="el-icon-attract"></i>
         <span slot="title">Git同步</span>
       </el-menu-item>
-      <el-menu-item @click="openLink('http://192.168.50.11:8028')">
+      <el-menu-item index="/teprunner/jenkins">
         <i class="el-icon-attract"></i>
         <span slot="title">Jenkins</span>
       </el-menu-item>
-      <el-menu-item >
+      <el-menu-item>
         <i class="el-icon-attract"></i>
         <span slot="title">埋点测试工具(TODO)</span>
       </el-menu-item>
@@ -49,7 +49,6 @@
         <i class="el-icon-attract"></i>
         <span slot="title">生产服务器监控</span>
       </el-menu-item>
-      
     </div>
   </NavLeft>
 </template>
@@ -65,7 +64,7 @@ export default {
   },
   methods: {
     openLink(url) {
-      window.open(url, '_blank')
+      window.open(url, "_blank");
     },
     saveProjectEnv() {
       let localProjectEnvList = JSON.parse(localStorage.getItem("projectEnvList"));
