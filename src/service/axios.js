@@ -16,7 +16,7 @@ const clearCache = backCode => {
 
 export const axiosInstance = axios.create({
   baseURL: "/api",
-  timeout: 30000,
+  timeout: 3000,
   responseType: "json",
   withCredentials: true,
   headers: {
@@ -42,11 +42,18 @@ axiosInstance.interceptors.response.use(
   res => {
     return res;
   },
-  err => {
-    if (err.response) {
+  error => {
+    console.log(error.response, "err");
+    if (error.code === "ECONNABORTED" || error.message === "Network Error" || error.message.includes("timeout")) {
+      Notification({
+        title: "提示",
+        type: "error",
+        message: "网络错误",
+      });
+    } else if (error.response) {
       let {
         response: { status, data },
-      } = err;
+      } = error;
       data = data || {};
       if ([401, 403].includes(status)) {
         setTimeout(() => {
@@ -64,7 +71,7 @@ axiosInstance.interceptors.response.use(
         });
       }
     }
-    return Promise.reject(err);
+    return Promise.reject(error);
   },
 );
 

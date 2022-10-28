@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card>
-      <el-table :data="getJenkinsData" border stripe fit>
+      <el-table :data="getJenkinsData" :header-cell-style="{ 'text-align': 'center' }" border stripe fit>
         <el-table-column type="index"></el-table-column>
         <el-table-column label="名字">
           <template slot-scope="scope">
