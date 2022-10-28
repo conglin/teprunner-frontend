@@ -39,16 +39,14 @@ export default {
       BRANCHS: [],
     };
   },
-  created() {
+  mounted() {
     this.getJenkinsData();
   },
   methods: {
     getJenkinsData() {
       this.$http.get("/teprunner/jenkins/get-jobs").then(response => {
         this.jenkinsData = response.data.data;
-        this.jenkinsData.forEach((element, index) => {
-          this.BRANCHS[index] = "origin/master";
-        });
+        this.BRANCHS = Array(this.filterJenkinsData.length).fill("origin/master", 0);
       });
     },
     sendJenkins(jenkins, index) {
