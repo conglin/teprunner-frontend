@@ -29,10 +29,6 @@
         <i class="el-icon-attract"></i>
         <span slot="title">Jenkins</span>
       </el-menu-item>
-      <el-menu-item>
-        <i class="el-icon-attract"></i>
-        <span slot="title">埋点测试工具(TODO)</span>
-      </el-menu-item>
       <el-menu-item @click="openLink('http://qa-bi.reta-inc.com/')">
         <i class="el-icon-attract"></i>
         <span slot="title">QA埋点数据</span>
