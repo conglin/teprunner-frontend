@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import axios from "./service/axios";
 import Element from "element-ui";
-import store from "./store";
+import store from "./store/index";
 
 import "./assets/css/common.scss";
 import "./assets/css/font.css";
@@ -26,9 +26,9 @@ Vue.config.productionTip = false;
 
 Vue.use(Element);
 Vue.use(axios);
-Vue.use(store);
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount("#app");
