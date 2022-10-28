@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card>
-      <el-table :data="filterJenkinsData" border stripe fit>
+      <el-table :data="getJenkinsData" border stripe fit>
         <el-table-column type="index"></el-table-column>
         <el-table-column label="名字">
           <template slot-scope="scope">
@@ -32,22 +32,25 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   data() {
     return {
-      jenkinsData: [],
       BRANCHS: [],
     };
   },
+  computed: {
+    ...mapGetters(["getJenkinsData"]),
+  },
   mounted() {
-    this.getJenkinsData();
+    this.getJenkins();
   },
   methods: {
-    getJenkinsData() {
-      this.$http.get("/teprunner/jenkins/get-jobs").then(response => {
-        this.jenkinsData = response.data.data;
-        this.BRANCHS = Array(this.filterJenkinsData.length).fill("origin/master", 0);
-      });
+    ...mapActions(["getJenkinsDataAsync"]),
+    getJenkins() {
+      this.getJenkinsDataAsync(this.$http);
+      this.BRANCHS = Array(this.getJenkinsData.length).fill("origin/master", 0);
     },
     sendJenkins(jenkins, index) {
       this.$http
@@ -69,12 +72,6 @@ export default {
     buildSuggestions(queryString, collBack) {
       const buildSuggestions = [{ value: "origin/master" }, { value: "origin/" }];
       collBack(buildSuggestions);
-    },
-  },
-  computed: {
-    filterJenkinsData() {
-      const arr = [3, 4, 5];
-      return this.jenkinsData.filter((item, index) => arr.includes(index));
     },
   },
 };
