@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card>
-      <el-table :data="jenkinsData" border stripe fit>
+      <el-table :data="filterJenkinsData" border stripe fit>
         <el-table-column type="index"></el-table-column>
         <el-table-column label="名字">
           <template slot-scope="scope">
@@ -36,12 +36,6 @@ export default {
   data() {
     return {
       jenkinsData: [],
-      buildParam: {
-        job_name: "",
-        job_params: {
-          BRANCH: "",
-        },
-      },
       BRANCHS: [],
     };
   },
@@ -55,11 +49,9 @@ export default {
         this.jenkinsData.forEach((element, index) => {
           this.BRANCHS[index] = "origin/master";
         });
-        console.log("获取jenkinsData", this.jenkinsData);
       });
     },
     sendJenkins(jenkins, index) {
-      console.log(jenkins, index, this.buildParam, this.buildParam.job_params.BRANCH[index]);
       this.$http
         .post("/teprunner/jenkins/build-job", {
           job_name: jenkins.name,
@@ -68,15 +60,23 @@ export default {
           },
         })
         .then(response => {
+          this.$message.success("构建成功");
           console.log(response);
         })
         .catch(error => {
+          this.$message.error("构建失败");
           console.log(error);
         });
     },
     buildSuggestions(queryString, collBack) {
       const buildSuggestions = [{ value: "origin/master" }, { value: "origin/" }];
       collBack(buildSuggestions);
+    },
+  },
+  computed: {
+    filterJenkinsData() {
+      const arr = [3, 4, 5];
+      return this.jenkinsData.filter((item, index) => arr.includes(index));
     },
   },
 };
