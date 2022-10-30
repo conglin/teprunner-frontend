@@ -1,8 +1,8 @@
-const actions = {
-  getJenkinsDataAsync(context, http) {
-    http.get("/teprunner/jenkins/get-jobs").then(response => {
-      context.commit("getJenkinsData", response);
-    });
+import { GetJenkinsData } from "../service/api";
+
+export default {
+  getJenkinsDataAsync(context) {
+    const { data } = GetJenkinsData();
+    context.commit("getJenkinsData", data);
   },
 };
-export default actions;

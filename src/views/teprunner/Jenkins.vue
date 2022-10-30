@@ -33,7 +33,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-
+import { BuildJenkins } from "../../service/api";
 export default {
   data() {
     return {
@@ -49,25 +49,25 @@ export default {
   methods: {
     ...mapActions(["getJenkinsDataAsync"]),
     getJenkins() {
-      this.getJenkinsDataAsync(this.$http);
-      this.BRANCHS = Array(this.getJenkinsData.length).fill("origin/master", 0);
+      try {
+        this.getJenkinsDataAsync();
+        this.BRANCHS = Array(this.getJenkinsData.length).fill("origin/master", 0);
+      } catch (error) {
+        this.$message.error("获取 jenkins数据失败");
+      }
     },
     sendJenkins(jenkins, index) {
-      this.$http
-        .post("/teprunner/jenkins/build-job", {
+      try {
+        BuildJenkins({
           job_name: jenkins.name,
           job_params: {
             BRANCH: this.BRANCHS[index],
           },
-        })
-        .then(response => {
-          this.$message.success("构建成功");
-          console.log(response);
-        })
-        .catch(error => {
-          this.$message.error("构建失败");
-          console.log(error);
         });
+        this.$message.success("构建成功");
+      } catch (error) {
+        this.$message.error("构建失败");
+      }
     },
     buildSuggestions(queryString, collBack) {
       const buildSuggestions = [{ value: "origin/master" }, { value: "origin/" }];
