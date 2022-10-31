@@ -37,7 +37,7 @@ import { BuildJenkins } from "../../service/api";
 export default {
   data() {
     return {
-      BRANCHS: [],
+      BRANCHS: ["origin/master", "develop_1.3.1", "develop_1.3.1"],
     };
   },
   computed: {
@@ -51,7 +51,6 @@ export default {
     async getJenkins() {
       try {
         await this.getJenkinsDataAsync();
-        this.BRANCHS = new Array(this.getJenkinsData.length).fill("origin/master", 0);
       } catch (error) {
         this.$message.error("获取 jenkins数据失败");
       }
