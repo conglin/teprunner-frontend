@@ -48,17 +48,17 @@ export default {
   },
   methods: {
     ...mapActions(["getJenkinsDataAsync"]),
-    getJenkins() {
+    async getJenkins() {
       try {
-        this.getJenkinsDataAsync();
-        this.BRANCHS = Array(this.getJenkinsData.length).fill("origin/master", 0);
+        await this.getJenkinsDataAsync();
+        this.BRANCHS = new Array(this.getJenkinsData.length).fill("origin/master", 0);
       } catch (error) {
         this.$message.error("获取 jenkins数据失败");
       }
     },
-    sendJenkins(jenkins, index) {
+    async sendJenkins(jenkins, index) {
       try {
-        BuildJenkins({
+        await BuildJenkins({
           job_name: jenkins.name,
           job_params: {
             BRANCH: this.BRANCHS[index],

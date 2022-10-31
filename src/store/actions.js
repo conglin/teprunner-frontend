@@ -1,8 +1,8 @@
 import { GetJenkinsData } from "../service/api";
 
 export default {
-  getJenkinsDataAsync(context) {
-    const { data } = GetJenkinsData();
+  async getJenkinsDataAsync(context) {
+    const { data } = await GetJenkinsData();
     context.commit("getJenkinsData", data);
   },
 };
