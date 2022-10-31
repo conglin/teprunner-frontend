@@ -37,7 +37,7 @@ import { BuildJenkins } from "../../service/api";
 export default {
   data() {
     return {
-      BRANCHS: ["origin/master", "develop_1.3.1", "develop_1.3.1"],
+      BRANCHS: ["origin/develop_1.3.1", "origin/develop/1.3.1", "origin/master"],
     };
   },
   computed: {
