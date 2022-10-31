@@ -9,14 +9,14 @@
             <span :style="{ 'color': scope.row.color }">{{ scope.row.name }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="地址">
+        <el-table-column label="链接">
           <template slot-scope="scope">
             <el-link :href="scope.row.url" target="_bank" type="primary">
               {{ decodeURI(scope.row.url.slice(25)) }}
             </el-link>
           </template>
         </el-table-column>
-        <el-table-column label="输入">
+        <el-table-column label="分支">
           <template slot-scope="scope">
             <el-autocomplete v-model="BRANCHS[scope.$index]" :fetch-suggestions="buildSuggestions"></el-autocomplete>
           </template>
@@ -69,7 +69,7 @@ export default {
       }
     },
     buildSuggestions(queryString, collBack) {
-      const buildSuggestions = [{ value: "origin/master" }, { value: "origin/" }];
+      const buildSuggestions = [{ value: "origin/master" }];
       collBack(buildSuggestions);
     },
   },
