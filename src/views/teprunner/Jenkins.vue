@@ -18,14 +18,15 @@
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button @click="openEditParam(scope.row)">运行</el-button>
+            <el-button @click="openEditParam(scope.row)">构建</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
     <!-- 参数配置对话框 -->
-    <el-dialog title="参数配置" :visible.sync="paramDialogVisible" width="500px">
-      <el-form ref="editParamFormRef" :model="getJenkinsParam" label-width="80px">
+    <el-dialog title="参数配置" :visible.sync="paramDialogVisible" width="600px">
+      <el-form ref="editParamFormRef" :model="getJenkinsParam">
+        <div v-if="this.$_.isEmpty(getJenkinsParam)">无需参数配置，点击构建即可</div>
         <el-form-item v-for="(param, nameKey, index) in getJenkinsParam.data" :key="index" :label="keyNames[nameKey]">
           <!--  StringParameterDefinition-->
           <div v-if="param.type === 'StringParameterDefinition'">
@@ -36,7 +37,6 @@
               placeholder="请输入内容"
             ></el-input>
           </div>
-
           <!-- BRANCH 区域 GitParameterDefinition-->
           <div v-if="param.type === 'GitParameterDefinition'">
             <el-select v-model="jenkinsJob.job_params[nameKey]" filterable>
@@ -62,7 +62,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="paramDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="buildJenkinsJob">运行</el-button>
+        <el-button type="primary" @click="buildJenkinsJob">构建</el-button>
       </span>
     </el-dialog>
   </div>
@@ -76,7 +76,6 @@ export default {
     return {
       BRANCHS: ["origin/develop_1.3.1", "origin/develop/1.3.1", "origin/master"],
       paramDialogVisible: false,
-      editParamForm: [{ allValueItems: { values: [] } }, { choices: [] }],
       jenkinsJob: {
         job_name: "",
         job_params: {},
@@ -84,10 +83,11 @@ export default {
       keyNames: {
         BRANCH: "分支",
         CONFIG: "配置",
-        IS_SEND_TO_APP_STORE: "是否",
-        app_path: "",
-        project_patt: "",
-        udid: "",
+        PACKAGE_TYPE: "包的类型",
+        IS_SEND_TO_APP_STORE: "是否发送到应用商店",
+        app_path: "测试应用的路径",
+        project_path: "UICrawler项目的路径",
+        udid: "设备唯一标识",
       },
     };
   },

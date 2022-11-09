@@ -1,16 +1,15 @@
 import App from "../main";
 
-const jenkinsParamType = {
-  GitParameterDefinition: "allValueItems.values",
-  ChoiceParameterDefinition: "choices",
-  BooleanParameterDefinition: "defaultParameterValue.value",
-};
-
 const mutations = {
   getJenkinsData(state, response) {
     state.jenkinsData = response.data;
   },
   getJenkinsParam(state, response) {
+    const jenkinsParamType = {
+      GitParameterDefinition: "allValueItems.values",
+      ChoiceParameterDefinition: "choices",
+      BooleanParameterDefinition: "defaultParameterValue.value",
+    };
     const jenkinsParam = new Object();
     // 生成动态对象 jenkinsParam
     response.data.forEach(element => {
@@ -31,7 +30,7 @@ const mutations = {
       );
     });
     state.jenkinsParam = jenkinsParam;
-    console.log(jenkinsParam);
+    // console.log(jenkinsParam, "jenkinsParam");
   },
 };
 export default mutations;
