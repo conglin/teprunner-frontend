@@ -99,6 +99,10 @@ export default {
   },
   methods: {
     ...mapActions(["getJenkinsDataAsync", "getJenkinsParamAsync"]),
+    /**
+     * @description: 获取 jenkins 数据
+     * @return {*}
+     */
     async getJenkins() {
       try {
         await this.getJenkinsDataAsync();
@@ -107,6 +111,11 @@ export default {
         this.$message.error("获取 jenkins数据失败");
       }
     },
+
+    /**
+     * @description: 发送构建请求
+     * @return {*}
+     */
     async buildJenkinsJob() {
       try {
         await BuildJenkins(this.jenkinsJob);
@@ -115,10 +124,11 @@ export default {
         this.$message.error("构建失败");
       }
     },
-    buildSuggestions(queryString, collBack) {
-      const buildSuggestions = [{ value: "origin/master" }];
-      collBack(buildSuggestions);
-    },
+    /**
+     * @description: 打开构建弹框
+     * @param {*} jenkinsData
+     * @return {*}
+     */
     async openEditParam(jenkinsData) {
       try {
         await this.getJenkinsParamAsync(jenkinsData.name);
