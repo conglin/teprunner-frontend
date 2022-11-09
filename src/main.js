@@ -14,7 +14,7 @@ Vue.component("icon-font", IconFont);
 
 import { onResponse, notifyMessage } from "./utils/commonMethods";
 Vue.prototype.$notifyMessage = notifyMessage;
-Vue.prototype.$handleResponese = onResponse;
+Vue.prototype.$handleResponse = onResponse;
 
 import Pagination from "@/components/Pagination";
 Vue.component("vue-pagination", Pagination);
@@ -22,13 +22,17 @@ Vue.component("vue-pagination", Pagination);
 import Highlight from "@/assets/js/highlight.js";
 Vue.use(Highlight);
 
+import _ from "lodash";
+Vue.prototype.$_ = _;
+
 Vue.config.productionTip = false;
 
 Vue.use(Element);
 Vue.use(axios);
 
-new Vue({
+const app = new Vue({
   router,
   store,
   render: h => h(App),
 }).$mount("#app");
+export default app;
