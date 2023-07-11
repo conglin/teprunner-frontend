@@ -31,7 +31,7 @@
           <!--  StringParameterDefinition-->
           <div v-if="param.type === 'StringParameterDefinition'">
             <el-input
-              v-for="(item, key, index) in param?.data || ' '"
+              v-for="(item, key, index) in param?.data || []"
               :key="index"
               v-model="jenkinsJob.job_params[nameKey]"
               placeholder="请输入内容"
